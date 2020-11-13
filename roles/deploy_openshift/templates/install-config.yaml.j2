@@ -27,6 +27,7 @@ networking:
 platform:
   {{deployment_type}}:
     region: {{ region }}
+    baseDomainResourceGroupName: {{ openshift_cluster_base_domain }}
 pullSecret: '{{ openshift_install_pull_secret | regex_replace( '^ ', '' ) }}'
 fips: false
 sshKey: {{ openshift_node_ssh_public_key }}
