@@ -1,4 +1,24 @@
 ---
+- host: localhost
+  tasks:
+   - name: clear out any Azure A DNS Records
+        azure_rm_dnsrecordset:
+          resource_group: "{{openshift_cluster_base_domain}}"
+          zone_name: "{{openshift_cluster_base_domain}}"
+          relative_name: "*.apps.{{openshift_cluster_name}}"
+          record_type: A
+          state: absent
+        when: deployment_type == "Azure"
+
+      - name: clear out any Azure CNAME DNS Records
+        azure_rm_dnsrecordset:
+          resource_group: "{{openshift_cluster_base_domain}}"
+          zone_name: "{{openshift_cluster_base_domain}}"
+          relative_name: "api.{{openshift_cluster_name}}"
+          record_type: CNAME
+          state: absent
+        when: deployment_type == "Azure"
+
 - hosts: localhost
 
   tasks:
@@ -102,23 +122,7 @@
       - name: Move S3 files to be deleted
         shell: "aws s3 mv --recursive s3://{{ s3_bucket }}/{{ s3_prefix }}/{{ workshop_type }}/{{ openshift_cluster_name }} s3://{{ s3_bucket }}/{{ s3_prefix }}/deleted/{{ workshop_type }}/{{ openshift_cluster_name }} "
       
-      - name: clear out any Azure A DNS Records
-        azure.azcollection.azure_rm_dnsrecordset:
-          resource_group: "{{openshift_cluster_base_domain}}"
-          zone_name: "{{openshift_cluster_base_domain}}"
-          relative_name:  *.apps{{openshift_cluster_name}}
-          record_type: A
-          state: absent
-        when: deployment_type == "Azure"
-
-      - name: clear out any Azure CNAME DNS Records
-        azure.azcollection.azure_rm_dnsrecordset:
-          resource_group: "{{openshift_cluster_base_domain}}"
-          zone_name: "{{openshift_cluster_base_domain}}"
-          relative_name: api.{{openshift_cluster_name}}
-          record_type: CNAME
-          state: absent     
-        when: deployment_type == "Azure"
+ 
        
       - name: "Delete top level prefix"
         aws_s3:
