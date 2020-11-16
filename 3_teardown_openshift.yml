@@ -8,7 +8,7 @@
         relative_name: "*.apps.{{openshift_cluster_name}}"
         record_type: A
         state: absent
-     when: deployment_type == "Azure"
+     when: deployment_type == "azure"
 
    - name: clear out any Azure CNAME DNS Records
      azure_rm_dnsrecordset:
@@ -17,7 +17,7 @@
         relative_name: "api.{{openshift_cluster_name}}"
         record_type: CNAME
         state: absent
-     when: deployment_type == "Azure"
+     when: deployment_type == "azure"
 
 - hosts: localhost
 
