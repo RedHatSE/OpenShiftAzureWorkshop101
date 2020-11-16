@@ -14,19 +14,19 @@ openshift_odo_path:                     /usr/local/bin/
 # openshift workshop user variables
 create_openshift_users:                 true
 openshift_cluster_admin_username:       labadmin
-openshift_cluster_admin_password:       "redhat!@#"
+openshift_cluster_admin_password:       "CHANGE_ME"
 openshift_user_count:                   20            # user1 through user{{ openshift_user_count }}
-openshift_user_password:                "redhat!@#"
+openshift_user_password:                "CHANGE_ME"
 
 # install-config.yml variables
-deployment_type:                        azure
-region:                                 eastus              
-openshift_cluster_name:                 demo
-openshift_cluster_base_domain:          openshift.tech
+deployment_type:                        "CHANGE_ME"        # AWS or Azure SPN will need to be set up prior          
+region:                                 "CHANGE_ME"        # Region will need to be either AWS for Amazon Region or Azure Region (eastus)      
+openshift_cluster_name:                 "CHANGE_ME"        # Domain name Cname record will be OpenShift_clsuter_name+Openshift_cluster_FQDN
+openshift_cluster_base_domain:          "CHANGE_ME"  # FQDN DNS Domain you own
 openshift_cluster_fqdn:                 "{{ openshift_cluster_name }}.{{ openshift_cluster_base_domain }}"
-openshift_control_node_instance_type:   Standard_D2S_V3    # default = 4vCPUs / 16 GB RAM (i.e. m5a.xlarge AWS) or (Azure Standard_D2S_V3)
+openshift_control_node_instance_type:   Standard_D8S_V3    # default = 4vCPUs / 16 GB RAM (i.e. m5a.xlarge AWS) or (Azure Standard_D8S_V3)
 openshift_control_node_replicas:        3              # use a value of '3' only
-openshift_worker_node_instance_type:    Standard_D2S_V3	   # default = 8 vCPUs / 32 GB RAM (i.e. m5a.2xlarge) or (Azure Standard_D2S_V3)
+openshift_worker_node_instance_type:    Standard_D8S_V3	   # default = 8 vCPUs / 32 GB RAM (i.e. m5a.2xlarge) or (Azure Standard_D8S_V3)
 openshift_worker_node_replicas:         3              # default = '3'  Node counts of =< 3 are valid
 openshift_install_pull_secret:          " {{ lookup('file', '{{ openshift_installer_path }}/pull-secret') }}"
 openshift_node_ssh_public_key:          "{{ lookup('file', '{{ openshift_build_path }}/{{ openshift_cluster_name }}-key.pub') }}"
