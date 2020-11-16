@@ -2,22 +2,22 @@
 - host: localhost
   tasks:
    - name: clear out any Azure A DNS Records
-        azure_rm_dnsrecordset:
-          resource_group: "{{openshift_cluster_base_domain}}"
-          zone_name: "{{openshift_cluster_base_domain}}"
-          relative_name: "*.apps.{{openshift_cluster_name}}"
-          record_type: A
-          state: absent
-        when: deployment_type == "Azure"
+     azure_rm_dnsrecordset:
+        resource_group: "{{openshift_cluster_base_domain}}"
+        zone_name: "{{openshift_cluster_base_domain}}"
+        relative_name: "*.apps.{{openshift_cluster_name}}"
+        record_type: A
+        state: absent
+     when: deployment_type == "Azure"
 
-      - name: clear out any Azure CNAME DNS Records
-        azure_rm_dnsrecordset:
-          resource_group: "{{openshift_cluster_base_domain}}"
-          zone_name: "{{openshift_cluster_base_domain}}"
-          relative_name: "api.{{openshift_cluster_name}}"
-          record_type: CNAME
-          state: absent
-        when: deployment_type == "Azure"
+   - name: clear out any Azure CNAME DNS Records
+     azure_rm_dnsrecordset:
+        resource_group: "{{openshift_cluster_base_domain}}"
+        zone_name: "{{openshift_cluster_base_domain}}"
+        relative_name: "api.{{openshift_cluster_name}}"
+        record_type: CNAME
+        state: absent
+     when: deployment_type == "Azure"
 
 - hosts: localhost
 
