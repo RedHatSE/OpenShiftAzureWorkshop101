@@ -19,7 +19,7 @@ openshift_user_count:                   20            # user1 through user{{ ope
 openshift_user_password:                "CHANGE_ME"
 
 # install-config.yml variables
-deployment_type:                        "CHANGE_ME"        # AWS or Azure SPN will need to be set up prior          
+deployment_type:                        "CHANGE_ME"        # (S3 or Azure) SPN will need to be set up prior          
 region:                                 "CHANGE_ME"        # Region will need to be either AWS for Amazon Region or Azure Region (eastus)      
 openshift_cluster_name:                 "CHANGE_ME"        # Domain name Cname record will be OpenShift_clsuter_name+Openshift_cluster_FQDN
 openshift_cluster_base_domain:          "CHANGE_ME"  # FQDN DNS Domain you own
