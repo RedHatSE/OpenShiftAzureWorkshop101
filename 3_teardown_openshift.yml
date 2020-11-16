@@ -1,7 +1,7 @@
 ---
 - host: localhost
   tasks:
-   - name: clear out any Azure A DNS Records
+   - name: clear out any Azure "A" DNS Records
      azure_rm_dnsrecordset:
         resource_group: "{{openshift_cluster_base_domain}}"
         zone_name: "{{openshift_cluster_base_domain}}"
@@ -10,7 +10,7 @@
         state: absent
      when: deployment_type == "azure"
 
-   - name: clear out any Azure CNAME DNS Records
+   - name: clear out any Azure "CNAME" DNS Records
      azure_rm_dnsrecordset:
         resource_group: "{{openshift_cluster_base_domain}}"
         zone_name: "{{openshift_cluster_base_domain}}"
