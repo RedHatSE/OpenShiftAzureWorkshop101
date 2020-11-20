@@ -1,5 +1,8 @@
-# ansible-ocp4-install-aws
-ansible-ocp4-install-aws is an ansible OpenShift 4 installer helper using the full stack AWS installation.  The playbooks allow for installation customization for cluster size, instance types, regions, along with other deployment options.
+# This has been modified off of the Original to Work on Azure
+   Some notes - Requires SPN of Azure to be setup on Deployment system.
+   
+# ansible-ocp4-install-aws/Azure
+ansible-ocp4-install-aws/Azure is an ansible OpenShift 4 installer helper using the full stack AWS/Azure installation.  The playbooks allow for installation customization for cluster size, instance types, regions, along with other deployment options.
 
 The ansible-ocp4-install-aws playbooks were developed to enable simple and rapid OpenShift 4 cluster deployments generally, and specifically to deliver OpenShift training workshop lab environments.  This is especially true for the Service Mesh deployment, as the `deploy_service_mesh_workshop` Ansible role is designed to deliver a Red Hat Service Mesh workshop environment.  The lab guide for this workshop is available [here](http://redhatgov.io/workshops/openshift_service_mesh/).
 
@@ -39,10 +42,10 @@ The `openshift_cluster_name` is the name of the cluster and combined with the `o
 #### `openshift_control_node_instance_type:` and `openshift_control_node_replicas:`
 `openshift_control_node_replicas` refers to the number of OpenShift control nodes to deploy.  Currently, `3` control nodes per cluster is the only supported configuration.  Values greater or less than `3` are should not be used.
 
-The default `openshift_control_node_instance_type` of `m5a.xlarge` does not need to be modified unless the number of workers is greater than `25`.  Refer to the [OpenShift Master node sizing](https://docs.openshift.com/container-platform/latest/scalability_and_performance/recommended-host-practices.html#master-node-sizing_) documentation for more information.
+The default `openshift_control_node_instance_type` of `m5a.xlarge` (AWS)/ `Standard_D8s_V3' (Azure)  does not need to be modified unless the number of workers is greater than `25`.  Refer to the [OpenShift Master node sizing](https://docs.openshift.com/container-platform/latest/scalability_and_performance/recommended-host-practices.html#master-node-sizing_) documentation for more information.
 
 #### `openshift_worker_node_instance_type:` and `openshift_worker_node_replicas:`
-The default `openshift_worker_node_instance_type` of `m5a.xlarge` does not need to be modified unless applications require more resources or specific instance capabilities (i.e. GPU acceleration).
+The default `openshift_worker_node_instance_type` of of `m5a.xlarge` (AWS)/ `Standard_D8s_V3' (Azure) does not need to be modified unless applications require more resources or specific instance capabilities (i.e. GPU acceleration).
 
 `openshift_control_node_replicas` refers to the number of OpenShift worker nodes to deploy.  Generally, the default value of `3` worker nodes is sufficient for most workshops or smaller OpenShift proof of concept clusters.  Valid `openshift_control_node_replicas` can extend from `3` to `250` for typical clusters; although workshops rarely require more than `5` nodes of the `m5a.xlarge` size.  [OpenShift 4.x supports](https://docs.openshift.com/container-platform/latest/scalability_and_performance/planning-your-environment-according-to-object-maximums.html#cluster-maximums-major-releases_object-limits) up to `2,000` worker nodes.
 
